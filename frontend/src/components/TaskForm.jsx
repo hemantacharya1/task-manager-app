@@ -2,13 +2,26 @@
 import { useState } from 'react';
 
 export default function TaskForm({ setTasks }) {
-  const [task, setTask] = useState({ title: '', assignee: '', dueDate: '', priority: 'P3' });
+  const [task, setTask] = useState({ 
+    title: '', 
+    assignee: '', 
+    dueDate: '', 
+    priority: 'P3',
+    completed: false
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTask = { ...task, id: Date.now() };
+    if (!task.title.trim()) return; // Don't add empty tasks
+    
+    const newTask = { 
+      ...task, 
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString()
+    };
+    
     setTasks(prev => [...prev, newTask]);
-    setTask({ title: '', assignee: '', dueDate: '', priority: 'P3' });
+    setTask({ title: '', assignee: '', dueDate: '', priority: 'P3', completed: false });
   };
 
   return (

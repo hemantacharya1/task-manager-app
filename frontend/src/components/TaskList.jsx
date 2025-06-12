@@ -6,7 +6,7 @@ export default function TaskList({ tasks, setTasks }) {
 
   const handleEditClick = (task) => {
     setEditingId(task.id);
-    setFormData(task);
+    setFormData({ ...task }); // Create a copy of the task
   };
 
   const handleCancel = () => {
@@ -15,8 +15,10 @@ export default function TaskList({ tasks, setTasks }) {
   };
 
   const handleSave = () => {
+    if (!formData.title?.trim()) return; // Don't save empty titles
+    
     setTasks(prev =>
-      prev.map(t => (t.id === editingId ? formData : t))
+      prev.map(t => (t.id === editingId ? { ...formData } : t))
     );
     setEditingId(null);
   };
@@ -26,8 +28,18 @@ export default function TaskList({ tasks, setTasks }) {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleToggleComplete = (id) => {
+    setTasks(prev =>
+      prev.map(task =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
   const handleDelete = (id) => {
-    setTasks(prev => prev.filter(t => t.id !== id));
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      setTasks(prev => prev.filter(t => t.id !== id));
+    }
   };
 
   return (

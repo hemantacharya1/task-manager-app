@@ -4,18 +4,27 @@ import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
 import { useState, useEffect } from 'react';
 
+// Helper function to get tasks from localStorage
+const getStoredTasks = () => {
+  try {
+    const storedTasks = localStorage.getItem('tasks');
+    return storedTasks ? JSON.parse(storedTasks) : [];
+  } catch (error) {
+    console.error('Error parsing tasks from localStorage:', error);
+    return [];
+  }
+};
+
 export default function HomePage() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => getStoredTasks());
 
-  // Load from localStorage
+  // Save to localStorage whenever tasks change
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('tasks')) || [];
-    setTasks(stored);
-  }, []);
-
-  // Save to localStorage
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    try {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    } catch (error) {
+      console.error('Error saving tasks to localStorage:', error);
+    }
   }, [tasks]);
 
   return (
