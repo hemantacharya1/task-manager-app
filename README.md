@@ -1,7 +1,5 @@
 # 🚀 TaskFlow AI - Intelligent Task Manager
 
-![TaskFlow AI Banner](./frontend/public/images/taskflow-banner.png)
-
 A modern, AI-powered task management application that helps you organize your work efficiently. Built with React, Tailwind CSS, and Google's Gemini AI.
 
 ## ✨ Features
@@ -15,9 +13,9 @@ A modern, AI-powered task management application that helps you organize your wo
 
 ## 🖥️ Screenshots
 
-| Dashboard | Task Creation | AI Parsing |
-|-----------|---------------|------------|
-| ![Dashboard](./frontend/public/images/dashboard.png) | ![Task Creation](./frontend/public/images/task-creation.png) | ![AI Parsing](./frontend/public/images/ai-parsing.png) |
+| Task Creation | AI Parsing |
+|-----------|---------------|
+| ![Task Creation](./frontend/public/images/task-creation.png) | ![AI Parsing](./frontend/public/images/ai-parsing.png) |
 
 ## 🚀 Getting Started
 
